@@ -8,8 +8,14 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [filterMovies, setFilterMovies] = useState([]);
   const [minRating, setminRating] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [fadeIn, setFadeIn] = useState(false);
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      setTimeout(() => setFadeIn(true), 50);
+    }, 600);
     fetchMovies();
   }, []);
 
@@ -28,11 +34,18 @@ const MovieList = () => {
       setFilterMovies(movies);
     } else {
       setminRating(rate);
-
       const filtered = movies.filter((movie) => movie.vote_average >= rate);
       setFilterMovies(filtered);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="loader">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <section className="movie_list">
@@ -46,7 +59,6 @@ const MovieList = () => {
             onRatingClick={handleFilter}
             ratings={[8, 7, 6]}
           />
-
           <select name="" id="" className="movie_sorting">
             <option value="">SortBy</option>
             <option value="">Date</option>
@@ -59,7 +71,8 @@ const MovieList = () => {
         </div>
       </header>
 
-      <div className="movie_cards">
+      {/* Apply fade-in effect after the loader disappears */}
+      <div className={`movie_cards ${fadeIn ? "fade-in" : ""}`}>
         {filterMovies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
