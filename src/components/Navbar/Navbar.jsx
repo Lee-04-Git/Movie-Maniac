@@ -1,4 +1,5 @@
 import React from "react";
+import DarkMode from "../DarkMode/DarkMode";
 import "./Navbar.css";
 import Fire from "../../assets/fire.png";
 import Star from "../../assets/glowing-star.png";
@@ -10,13 +11,14 @@ const Navbar = () => {
       <h1>MovieManiac</h1>
 
       <div className="navbar_links">
-        <a href="">
+        <DarkMode />
+        <a href="#popular">
           Popular <img src={Fire} alt="fire emoji" className="navbar_emoji" />
         </a>
-        <a href="">
+        <a href="#top_rated">
           Top Rated <img src={Star} alt="star emoji" className="navbar_emoji" />
         </a>
-        <a href="">
+        <a href="#upcoming">
           Upcoming{" "}
           <img src={Party} alt="party face emoji" className="navbar_emoji" />
         </a>
